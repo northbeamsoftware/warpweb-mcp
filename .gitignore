@@ -17,3 +17,7 @@ npm-debug.log*
 # test artifacts
 coverage/
 .vitest-result/
+
+# MCPB build artifacts (regenerated via instructions in BUILD-MCPB.md)
+build/
+*.mcpb

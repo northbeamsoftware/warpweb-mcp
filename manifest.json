@@ -1,0 +1,113 @@
+{
+  "$schema": "https://raw.githubusercontent.com/modelcontextprotocol/mcpb/main/dist/mcpb-manifest.schema.json",
+  "manifest_version": "0.3",
+  "name": "warpweb",
+  "display_name": "Warpweb",
+  "version": "0.1.2",
+  "description": "Research, build, and deploy AI-generated websites via the Warpweb API.",
+  "long_description": "Official MCP server for the Warpweb API. Research, build, and deploy AI-generated websites from any MCP-compatible client.\n\nOne POST kicks off research, build, and deploy: Warpweb pulls Google Places data (hours, photos, reviews, service area), writes vertical-matched copy, generates a design, builds a multi-page site, adds SEO (meta tags, sitemap, Schema.org JSON-LD), and deploys to a free `*.warpweb.app` subdomain. Best for service-based local businesses (trades, clinics, salons, agencies, restaurants, real estate).\n\nTools exposed (10): `search_businesses`, `create_site`, `get_site`, `list_sites`, `refresh_site`, `create_revision`, `check_domain`, `register_domain`, `attach_domain`, `configure_form_webhook`.\n\nGet an API key at https://warpweb.ai/app — 520 free credits on signup, no card required.",
+  "author": {
+    "name": "Northbeam Software",
+    "url": "https://warpweb.ai"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/northbeamsoftware/warpweb-mcp"
+  },
+  "homepage": "https://warpweb.ai",
+  "documentation": "https://docs.warpweb.ai",
+  "support": "https://github.com/northbeamsoftware/warpweb-mcp/issues",
+  "icon": "icon.png",
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/index.js"],
+      "env": {
+        "WARPWEB_API_KEY": "${user_config.warpweb_api_key}",
+        "WARPWEB_API_URL": "${user_config.warpweb_api_url}"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "search_businesses",
+      "description": "Disambiguate a business name against Google Places before building. Returns up to 5 candidates with placeId, address, phone, and rating."
+    },
+    {
+      "name": "create_site",
+      "description": "Kick off an end-to-end website build (research, copy, design, deploy). Returns siteId immediately; real builds take 3-8 minutes."
+    },
+    {
+      "name": "get_site",
+      "description": "Fetch one site's current status. Use to poll a build (every 2-5 seconds) while status is `generating`."
+    },
+    {
+      "name": "list_sites",
+      "description": "List every site on the account."
+    },
+    {
+      "name": "refresh_site",
+      "description": "Bump the inactivity timer on a free-subdomain site (auto-pauses after 7 days). Idempotent and free."
+    },
+    {
+      "name": "create_revision",
+      "description": "Conversational edit of a deployed site. Send a plain-English prompt; Warpweb routes small surgical edits or full structural changes automatically."
+    },
+    {
+      "name": "check_domain",
+      "description": "Check availability and price for a candidate domain. Free, returns a few related suggestions."
+    },
+    {
+      "name": "register_domain",
+      "description": "Buy a domain via Cloudflare Registrar and attach it to a site. Must call `check_domain` first."
+    },
+    {
+      "name": "attach_domain",
+      "description": "Attach a customer-owned domain already registered elsewhere. Returns the CNAME target to set at their existing registrar."
+    },
+    {
+      "name": "configure_form_webhook",
+      "description": "Point form submissions on a site at your HTTP(S) endpoint. Each delivery is HMAC-SHA256 signed; the signing secret is returned once on first configure or rotate."
+    }
+  ],
+  "keywords": [
+    "warpweb",
+    "website",
+    "website-generator",
+    "ai",
+    "deploy",
+    "domains",
+    "seo",
+    "small-business",
+    "northbeam"
+  ],
+  "license": "MIT",
+  "privacy_policies": [
+    "https://warpweb.ai/privacy"
+  ],
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  },
+  "user_config": {
+    "warpweb_api_key": {
+      "type": "string",
+      "title": "Warpweb API Key",
+      "description": "Your Warpweb API key, issued at https://warpweb.ai/app. Format: wwk_... — 520 free credits on signup, no card required.",
+      "sensitive": true,
+      "required": true
+    },
+    "warpweb_api_url": {
+      "type": "string",
+      "title": "API Base URL (advanced)",
+      "description": "Override the API base URL. Defaults to https://api.warpweb.ai/v1. For testing/staging only — leave blank for production.",
+      "required": false,
+      "default": "https://api.warpweb.ai/v1"
+    }
+  }
+}

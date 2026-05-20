@@ -1,0 +1,26 @@
+# Files excluded from the .mcpb bundle.
+# Default exclusions (.git, node_modules/.cache, *.log, lockfiles, etc.) apply
+# in addition to anything listed here.
+
+# Source TypeScript — only the compiled `dist/` is shipped.
+src/
+tests/
+tsconfig.json
+tsconfig.test.json
+vitest.config.ts
+
+# CI + repo metadata not needed at runtime
+.github/
+.vscode/
+.idea/
+
+# Registry metadata (MCP registry server.json, not MCPB-related)
+server.json
+
+# Build artifacts we don't need
+*.tsbuildinfo
+coverage/
+.vitest-result/
+
+# Docs we don't need at runtime (README is kept; BUILD-MCPB.md is build-only)
+BUILD-MCPB.md
