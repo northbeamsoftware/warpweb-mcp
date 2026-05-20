@@ -1,0 +1,49 @@
+# Publishes the package to npm and registers/updates the entry in the MCP
+# Registry. Triggered by pushing a git tag matching `v*` (e.g. `v0.1.0`).
+#
+# Required repo secrets:
+#   NPM_TOKEN — npm automation token with publish rights for `warpweb-mcp`
+#
+# The MCP Registry publish step uses GitHub OIDC for authentication (no secret
+# needed) — see https://github.com/modelcontextprotocol/registry for details.
+# The `name` in server.json must use the `com.northbeamsoftware/...` prefix
+# (matches the org so OIDC validates ownership).
+
+name: Publish
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+  id-token: write  # required for npm provenance + MCP Registry OIDC
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+
+      - name: Publish to npm
+        run: npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Install MCP publisher
+        run: |
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" \
+            | tar -xz -C /tmp
+          chmod +x /tmp/mcp-publisher
+
+      - name: Publish to MCP Registry
+        run: /tmp/mcp-publisher publish

@@ -1,0 +1,19 @@
+# npm uses package.json "files" allowlist when present, but be explicit
+# about what should never be shipped.
+
+src/
+tests/
+.github/
+.vscode/
+.idea/
+node_modules/
+coverage/
+
+tsconfig.json
+tsconfig.test.json
+vitest.config.ts
+server.json
+
+*.log
+.DS_Store
+.env*

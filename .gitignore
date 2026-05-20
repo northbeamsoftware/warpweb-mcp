@@ -1,4 +1,19 @@
 node_modules/
 dist/
 .env
+.env.*
+!.env.example
 
+# editor / OS
+.DS_Store
+*.swp
+.vscode/
+.idea/
+
+# logs
+*.log
+npm-debug.log*
+
+# test artifacts
+coverage/
+.vitest-result/

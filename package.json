@@ -1,0 +1,55 @@
+{
+  "name": "warpweb-mcp",
+  "version": "0.1.0",
+  "description": "Official MCP server for the Warpweb API — research, build, and deploy AI-generated websites from any MCP-compatible client (Claude Desktop, Claude Code, Cline, etc.).",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "warpweb-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "warpweb",
+    "ai",
+    "website-generator",
+    "claude",
+    "anthropic",
+    "llm-tools"
+  ],
+  "homepage": "https://github.com/northbeamsoftware/warpweb-mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/northbeamsoftware/warpweb-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/northbeamsoftware/warpweb-mcp/issues"
+  },
+  "author": "Northbeam Software",
+  "license": "MIT"
+}
