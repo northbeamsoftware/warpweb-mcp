@@ -61,7 +61,10 @@ The client picks `create_site` from the tool list, fires the build, and polls un
 
 ## Tools exposed
 
-Nine tools, mapping 1:1 onto the Warpweb V1 REST API. Full request/response shapes live in [docs.warpweb.ai](https://docs.warpweb.ai).
+Ten tools, mapping 1:1 onto the Warpweb V1 REST API. Full request/response shapes live in [docs.warpweb.ai](https://docs.warpweb.ai).
+
+### Businesses
+- **`search_businesses`** — disambiguate a business name against Google Places before building. Call this first whenever the user gives only a name ("Acme Plumbing"); going straight to `create_site` will silently pick the wrong match for common names. Returns up to 5 candidates with `placeId`, address, phone, rating — pass the chosen `placeId` to `create_site` for an exact match. Free.
 
 ### Sites
 - **`create_site`** — kick off an end-to-end build. Returns `siteId` immediately; real builds take 3–8 minutes. Poll `get_site` or subscribe to the `site.complete` lifecycle webhook.
@@ -111,7 +114,7 @@ Per-call directional credit costs:
 | `create_revision` | ~20–100 credits |
 | `attach_domain` | 5 credits |
 | `register_domain` | 50 credits + registrar pass-through |
-| `check_domain`, `get_site`, `list_sites`, `refresh_site`, `configure_form_webhook` | Free |
+| `search_businesses`, `check_domain`, `get_site`, `list_sites`, `refresh_site`, `configure_form_webhook` | Free |
 
 ---
 

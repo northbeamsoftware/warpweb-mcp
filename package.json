@@ -1,6 +1,6 @@
 {
   "name": "warpweb-mcp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "mcpName": "io.github.northbeamsoftware/warpweb",
   "description": "Official MCP server for the Warpweb API — research, build, and deploy AI-generated websites from any MCP-compatible client (Claude Desktop, Claude Code, Cline, etc.).",
   "type": "module",
