@@ -13,8 +13,8 @@ describe('buildServer', () => {
   it('registers all tools by default', () => {
     const { client } = mockClient();
     buildServer({ client });
-    // allTools is the source-of-truth list; assert we have the expected 9
-    expect(allTools.length).toBe(9);
+    // allTools is the source-of-truth list; assert we have the expected 10
+    expect(allTools.length).toBe(10);
   });
 
   it('exposes exactly the documented tool names', () => {
@@ -30,6 +30,7 @@ describe('buildServer', () => {
         'list_sites',
         'refresh_site',
         'register_domain',
+        'search_businesses',
       ].sort()
     );
   });
