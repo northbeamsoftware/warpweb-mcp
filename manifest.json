@@ -8,7 +8,7 @@
   "long_description": "Official MCP server for the Warpweb API. Research, build, and deploy AI-generated websites from any MCP-compatible client.\n\nOne POST kicks off research, build, and deploy: Warpweb pulls Google Places data (hours, photos, reviews, service area), writes vertical-matched copy, generates a design, builds a multi-page site, adds SEO (meta tags, sitemap, Schema.org JSON-LD), and deploys to a free `*.warpweb.app` subdomain. Best for service-based local businesses (trades, clinics, salons, agencies, restaurants, real estate).\n\nTools exposed (10): `search_businesses`, `create_site`, `get_site`, `list_sites`, `refresh_site`, `create_revision`, `check_domain`, `register_domain`, `attach_domain`, `configure_form_webhook`.\n\nGet an API key at https://warpweb.ai/app — 520 free credits on signup, no card required.",
   "author": {
     "name": "Northbeam Software",
-    "url": "https://warpweb.ai"
+    "url": "https://github.com/northbeamsoftware"
   },
   "repository": {
     "type": "git",
